@@ -1,0 +1,9 @@
+{
+  "title": "Minha Loja Angular",
+  "header": {
+    "home": "Início",
+    "products": "Produtos",
+    "about": "Sobre",
+    "contact": "Contato"
+  }
+}
