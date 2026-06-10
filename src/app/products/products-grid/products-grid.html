@@ -1,6 +1,6 @@
 <div class="product-grid">
   @for (product of products(); track product.id) {
-  <app-card-product/>
+  <app-card-product [product]="product"/>
 }@empty {
   <div class="empty-state">
      <mat-icon>inventory_2</mat-icon>
