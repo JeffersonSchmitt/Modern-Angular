@@ -1,11 +1,16 @@
-<div class="product-grid">
-  @for (product of products(); track product.id) {
-  <app-card-product [product]="product"/>
-}@empty {
-  <div class="empty-state">
-     <mat-icon>inventory_2</mat-icon>
-    <h3> No products available </h3>
-    <p> Please check back later for new arrivals! </p>
+<div class="products-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search Products</mat-label>
+    <input matInput placeholder="Search by name or category" [(ngModel)]="searchTerm" />
+  </mat-form-field>
+  <div class="product-grid">
+    @for (product of filteredProducts(); track product.id) {
+      <app-card-product [product]="product" />
+    } @empty {
+      <div class="empty-state">
+        <mat-icon>inventory_2</mat-icon>
+        <h3>No products match on your search</h3>
+      </div>
+    }
   </div>
-}
 </div>
