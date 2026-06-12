@@ -1,4 +1,5 @@
-import { Component, computed, signal } from '@angular/core';
+import { CartService } from './../../service/cart-service/cart-service';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CardProduct } from '../card-product/card-product';
 import { Product } from '../../interface/products/product';
 import { MatIcon } from '@angular/material/icon';
@@ -13,6 +14,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './products-grid.scss',
 })
 export class ProductsGrid {
+  private cartService!: CartService;
+
+  ProductsGrid(cartService: CartService) {
+    this.cartService = cartService;
+  }
+
   protected readonly searchTerm = signal('');
   protected readonly products = signal<Product[]>([
     {
@@ -38,6 +45,7 @@ export class ProductsGrid {
       originalPrice: 99.99,
     },
   ]);
+  private readonly CartService = inject(CartService);
 
   //protected readonly filteredProducts = signal<Product[]>(this.products());
   protected readonly filteredProducts = computed(() => {
@@ -50,7 +58,7 @@ export class ProductsGrid {
     );
   });
 
-  protected clearSearch() {
-    this.searchTerm.set('');
+  protected onAddToCart(product: Product): void {
+    this.CartService.addToCart(product);
   }
 }
